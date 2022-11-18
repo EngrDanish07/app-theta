@@ -1,4 +1,3 @@
-
 const express = require('express')
 const app = express()
 const port = 3000
@@ -27,15 +26,7 @@ app.get('/getFilter',async(req,res)=>{
 app.get('/getSum',async(req,res)=>{
   let gettotal=await pool.query(`SELECT count(id) AS "Total Tasks" FROM todolist`)
   let gettrue=await pool.query(`SELECT count(done) AS "tasks" FROM todolist group by done order by count(done) ASC`)
-  // let getfalse=await pool.query(`SELECT count(done) FROM todolist where done=false`)
-  // console.log(res.json({
-  //   'Total':gettotal,
-  //   "done":gettrue,
-  //   "False":getfalse})
-  //   )
-  // const subtotal=JSON.parse(gettotal)
-  // const subtrue=JSON.parse(gettrue)
-  // const subfalse=JSON.parse(getfalse)
+
   res.json({
     'Total':gettotal.rows[0],
     "Done" : gettrue.rows[0],
